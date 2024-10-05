@@ -44,14 +44,15 @@ function Login() {
                 <h3>Login Page</h3>
                 <form onSubmit={handleSubmit}>
                     <label>Email: </label>
-                    <input type="emailid" name="emailid" style={{ marginLeft: 20 }} onChange={(event) => setEmailId(event.target.value)}
+                    <input type="emailid" name="emailid" style={{ marginLeft: 48 }} onChange={(event) => setEmailId(event.target.value)}
                         value={emailid}
                     /><br />
+                    <span></span>
                     <label>Password: </label>
                     <input type="password" name="password" style={{ marginLeft: 20 }} onChange={(event) => setPassword(event.target.value)}
-                        value={password} /><br />
+                        value={password} /><br /><br />
 
-                    <input type="submit" value="SignIn" />
+                    <input type="submit" style={{ marginLeft: 50 }} value="Login" />
                 </form>
                 <br />
             </div>
