@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Header } from './Header';
 import { Footer } from "./Footer";
 import { adminEndpoint } from "../utils/Constants";
+import { useDispatch } from "react-redux";
 
 function Login() {
+    let dispatch = useDispatch();
     let url = `${adminEndpoint}login/`;
     let [emailid, setEmailId] = useState("");
     let [password, setPassword] = useState("");
@@ -27,6 +29,7 @@ function Login() {
                 if (result.data.typeOfUser === "admin") {
                     navigate("/admin")
                 } else if (result.data.typeOfUser === "client") {
+                    dispatch({ type: 'SET_EMAIL', payload: emailid });
                     navigate("/movies")
                 } else {
                     setError(result)

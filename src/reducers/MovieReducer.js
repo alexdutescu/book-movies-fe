@@ -3,7 +3,8 @@ const initialState={
     filteredMovies: [],
     movieTypes: [],
     loading: false,
-    error: ''
+    error: '',
+    email: ''
 };
 
 const MovieReducer=(state=initialState,action)=>{
@@ -67,6 +68,11 @@ const MovieReducer=(state=initialState,action)=>{
             movies: [],
             filteredMovies: null,
             error: ''
+        }
+        case "SET_EMAIL":
+        return {
+            ...state,
+            email: action.payload,
         }
     
         default:

@@ -15,18 +15,14 @@ const Booking = (props) => {
     var navigate = useNavigate();
     const id = location.state?.id
     const movies = useSelector(state => state.initialMovies)
+    const email = useSelector(state => state.email)
     let movie = movies.find(m => m.id == id)
     var currentDate = new Date();
     const [dayValue, setDayValue] = useState(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()));
     const [hourValue, setHourValue] = useState(10);
-    const [emailValue, setEmailValue] = useState('');
     const [cinemaValue, setCinemaValue] = useState(movie?.cinemas[0].id);
     const [showCalendar, setShowCalendar] = useState(false);
     const [error, setError] = useState('');
-
-    const handleEmailChange = (event) => {
-        setEmailValue(event.target.value);
-    }
 
     const handleHourValue = (event) => {
         setHourValue(event.target.value);
@@ -41,13 +37,13 @@ const Booking = (props) => {
         var finalBookTimeZone = hourValue * 3600000;
        
         var objToSend = {
-            email: emailValue,
+            email: email,
             movieId: movie.id,
             cinemaId: cinemaValue,
             reservationDateFe: dayValue.getTime() + finalBookTimeZone
         }
         var response = {
-            email: emailValue,
+            email: email,
             name: movie.name,
             date: `${dayValue.getDate()}/${dayValue.getMonth() + 1}/${dayValue.getFullYear()}`,
             hour: `${hourValue}:00`,
@@ -72,10 +68,6 @@ const Booking = (props) => {
             <Header />
             <h5 style={{ marginTop: 80, marginBottom: 10, marginLeft: 20 }} class="card-title"><b>{movie.name} - {movie.movieType}</b></h5><br></br>
             <span style={{ "color": "red" }}>{error}</span>
-            <div class="form-group" style={{ marginLeft: 20 }}>
-                <label for="testemail" style={{ fontSize: 20, color: "#348269" }}>Email: </label><br></br>
-                <input style={{ marginTop: 10 }} type="text" placeholder="Fill in your email.." value={emailValue} onChange={handleEmailChange} />
-            </div>
             <div class="form-group" style={{ marginLeft: 20 }}>
                 <label style={{ fontSize: 20, color: "#348269" }}>Date: </label><br></br>
                 <input style={{ marginTop: 10 }} type="button" placeholder="Select date" value={`${dayValue.getDate()}/${dayValue.getMonth() + 1}/${dayValue.getFullYear()}`} onClick={() => setShowCalendar(!showCalendar)} />
